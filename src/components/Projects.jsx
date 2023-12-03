@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
-const supabase = createClient(
-  supabaseUrl,
-  supabaseKey
-);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-export default function Projects() {
+export default function Projects({ onSetSelectedProject }) {
   const [projectsList, setProjectsList] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     getProjects();
@@ -20,6 +18,14 @@ export default function Projects() {
   async function getProjects() {
     const { data } = await supabase.from('Projects').select();
     setProjectsList(data);
+  }
+
+  useEffect(() => {
+    onSetSelectedProject(selectedProject);
+  }, [selectedProject]);
+
+  function handleButtonClick(projectId) {
+    setSelectedProject(projectId);
   }
 
   return (
@@ -35,7 +41,10 @@ export default function Projects() {
                 key={project.ProjectID}
                 className="bg-secondary my-2 text-text rounded cursor-pointer h-20 flex items-center justify-center"
               >
-                <button className='w-full h-full'>
+                <button
+                  onClick={() => handleButtonClick(project.ProjectID)}
+                  className="w-full h-full"
+                >
                   <span>{project.Name}</span>
                 </button>
               </li>
