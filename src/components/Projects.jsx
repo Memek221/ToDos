@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 import { createClient } from '@supabase/supabase-js';
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+
 const supabase = createClient(
-  'https://nhosxomvujuwxmoutreu.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ob3N4b212dWp1d3htb3V0cmV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDE1OTk3OTksImV4cCI6MjAxNzE3NTc5OX0.aZZhqp5QRAGXHYqzjj37UN678d2s5SrER6ApO67a5Uo'
+  supabaseUrl,
+  supabaseKey
 );
 
 export default function Projects() {
   const [projectsList, setProjectsList] = useState([]);
-
-  console.log(projectsList);
 
   useEffect(() => {
     getProjects();
