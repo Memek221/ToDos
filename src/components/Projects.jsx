@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-export default function Projects({ onSetSelectedProject }) {
+export default function Projects({ supabase, onSetSelectedProject }) {
   const [projectsList, setProjectsList] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -24,8 +17,8 @@ export default function Projects({ onSetSelectedProject }) {
     onSetSelectedProject(selectedProject);
   }, [selectedProject]);
 
-  function handleButtonClick(projectId) {
-    setSelectedProject(projectId);
+  function handleButtonClick(project) {
+    setSelectedProject(project);
   }
 
   return (
@@ -42,7 +35,7 @@ export default function Projects({ onSetSelectedProject }) {
                 className="bg-secondary my-2 text-text rounded cursor-pointer h-20 flex items-center justify-center"
               >
                 <button
-                  onClick={() => handleButtonClick(project.ProjectID)}
+                  onClick={() => handleButtonClick(project)}
                   className="w-full h-full"
                 >
                   <span>{project.Name}</span>
