@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import TodosList from './TodosList';
+import TodosLists from './TodosLists';
 
-export default function ToDos({supabase, selectedProject }) {
+export default function ToDos({ supabase, selectedProject }) {
   const [todos, setTodos] = useState(null);
 
   useEffect(() => {
@@ -18,14 +18,16 @@ export default function ToDos({supabase, selectedProject }) {
   }
 
   return (
-    <div className="w-4/5 bg-background rounded m-2">
+    <div className="w-4/5 bg-background rounded m-2 flex flex-col items-center justify-around">
       {selectedProject ? (
         <>
-          <h2>{selectedProject.Name}</h2>
-          <TodosList todos={todos} />
+          <h2 className="text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary inline">
+            {selectedProject.Name}
+          </h2>
+          <TodosLists todos={todos} />
         </>
       ) : (
-        <h2>You haven't selected any project yet :)</h2>
+        <h2 className='text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary inline'>You haven't selected any project yet :)</h2>
       )}
     </div>
   );
