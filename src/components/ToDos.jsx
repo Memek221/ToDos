@@ -18,7 +18,7 @@ export default function ToDos({ supabase, selectedProject }) {
   }
 
   return (
-    <div className="w-4/5 bg-background rounded m-2 flex flex-col items-center justify-around">
+    <div className="w-4/5 bg-light rounded m-2 flex flex-col items-center justify-around">
       {selectedProject ? (
         <>
           <h2 className="text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary inline">
