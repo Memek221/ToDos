@@ -11,7 +11,7 @@ export default function TodosLists({ todos }) {
         <Modal
           open={modalIsOpen}
           type="text"
-          label="Todo content: "
+          label="Todo content"
           onClose={() => setModalIsOpen(false)}
         />
       )}
