@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 import TodosLists from './TodosLists';
+import { useSupabase } from '../contexts/SupabaseContext';
 
-export default function ToDos({ supabase, selectedProject }) {
+export default function ToDos({ selectedProject }) {
   const [todos, setTodos] = useState(null);
+  const supabase = useSupabase();
 
   useEffect(() => {
     if (selectedProject) getTodos();

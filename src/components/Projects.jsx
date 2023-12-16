@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useSupabase } from '../contexts/SupabaseContext';
 
-export default function Projects({ supabase, onSetSelectedProject }) {
+export default function Projects({ onSetSelectedProject }) {
   const [projectsList, setProjectsList] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const supabase = useSupabase();
 
   useEffect(() => {
     getProjects();
